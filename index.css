@@ -1,6 +1,11 @@
+body{
+    margin: 0px;
+    background-image: url("https://i.stack.imgur.com/p9mUO.jpg");
+    background-size: cover;
+}
 .bg-container{
-    margin-top: 5rem;
     height: 100vh;
+
 }
 .input-box{
     text-align: center;
@@ -8,12 +13,24 @@
 .heading{
     font-size: 40px;
     color: #0d0907;
+    padding-top: 50px;
+    font-family: "Roboto";
+    font-weight: 700;
+}
+h2{
+    font-weight: 600;
+    font-size: 26px;
+    font-family: "bree serif";
+    color: #212121;
 }
 .task{
-    width: 350px;
+    width: 380px;
     outline: none;
     font-size: 14px;
-    padding: 4px 10px;
+    padding: 10px 10px;
+    border-radius: 5px;
+    background-color: #666666;
+    border: none;
 }
 .task-list-box{
     margin-left: 30rem;

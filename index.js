@@ -6,18 +6,25 @@ addBtn.addEventListener("click" , addData)
 
 
 function addData(){
-    const chapterName = inputValue.value
-    const uniqueId = Math.random().toString(36).substr(2, 9)
-   let getTasks = JSON.parse(localStorage.getItem("tasks")) ?? []
-    const newTask = {
-        id : uniqueId,
-        task : chapterName
+    if (addBtn.textContent === "update"){
+        addBtn.textContent = "Add"
     }
-getTasks.push(newTask)
-    console.log(newTask)
-    console.log(getTasks)
-    localStorage.setItem("tasks" , JSON.stringify(getTasks))
-    displayTasks()
+    const chapterName = inputValue.value
+
+    if (chapterName !=""){
+        const uniqueId = Math.random().toString(36).substr(2, 9)
+        let getTasks = JSON.parse(localStorage.getItem("tasks")) ?? []
+         const newTask = {
+             id : uniqueId,
+             task : chapterName
+         }
+     getTasks.push(newTask)
+         console.log(newTask)
+         console.log(getTasks)
+         localStorage.setItem("tasks" , JSON.stringify(getTasks))
+         displayTasks()
+    }
+    
     
 }
 
@@ -31,7 +38,7 @@ displayTasks = () => {
         finalData +=  `
         <div class="task-list">
         <h1 class="taskname">${element.task}</h1>
-        <button onclick ="edittask(this)" class="edit">
+        <button onclick ="edittask(${i})" class="edit">
         <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
         <button onclick="removetask(${i})" class="dlt">
@@ -43,7 +50,10 @@ displayTasks = () => {
     })
         
         mainDom.innerHTML = finalData
-        inputValue.value = ""
+        if (addBtn.textContent === "Add"){
+            inputValue.value = ""
+
+        }
 }
 
 
@@ -57,7 +67,23 @@ function removetask(i) {
     displayTasks()
 }
 
-function edittask(currElement){
+
+function edittask(i){
+    let getData = JSON.parse(localStorage.getItem("tasks")) ?? []
+    let editName = getData[i].task
+
+    inputValue.value = editName
+    addBtn.textContent = "update"
+    console.log(editName)
+
+    getData.splice(i,1)
+
+    localStorage.setItem("tasks" , JSON.stringify(getData))
+
+displayTasks()
+}
+
+function edittak(currElement){
     if (currElement.textContent==="done"){
         currElement.textContent = "edit"
         let currName = currElement.previousElementSibling.value
